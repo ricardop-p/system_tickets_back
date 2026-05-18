@@ -24,10 +24,9 @@ app.use('/api/tickets', authenticateToken, ticketRoutes);
 app.use('/api/varius', authenticateToken, variusRoutes);
 
 
-const PORT = 8007;
+const PORT = process.env.PORT || 8007;
 
-app.listen(PORT, () => {
-  
-  console.log(`🚀 http://localhost:${PORT}`);
-  console.log(`📘 Swagger http://localhost:${PORT}/api-docs`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+  console.log(`📘 Swagger disponible en /api-docs`);
 });

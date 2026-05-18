@@ -1,0 +1,9 @@
+services:
+  system-tickets-back:
+    build: .
+    container_name: system-tickets-back
+    restart: unless-stopped
+    ports:
+      - "8007:8007"
+    env_file:
+      - .env

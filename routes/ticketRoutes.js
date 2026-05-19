@@ -1,5 +1,7 @@
 import express from 'express';
-import { getTickets, getTicketById, createTicket } from '../controllers/ticketController.js';
+
+import { createTicket, getTicketById, getTickets } from '../controllers/ticketController.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 
 const router = express.Router();
 
@@ -16,9 +18,9 @@ const router = express.Router();
  *       200:
  *         description: Lista de tickets obtenida correctamente
  *       401:
- *         description: Token no enviado o inválido
+ *         description: Token no enviado o invalido
  */
-router.get('/', getTickets);
+router.get('/', asyncHandler(getTickets));
 
 /**
  * @swagger
@@ -40,11 +42,11 @@ router.get('/', getTickets);
  *       200:
  *         description: Ticket obtenido correctamente
  *       401:
- *         description: Token no enviado o inválido
+ *         description: Token no enviado o invalido
  *       404:
  *         description: Ticket no encontrado
  */
-router.get('/:id', getTicketById);
+router.get('/:id', asyncHandler(getTicketById));
 
 /**
  * @swagger
@@ -60,14 +62,17 @@ router.get('/:id', getTicketById);
  *       content:
  *         application/json:
  *           example:
- *             title: Error en el sistema
- *             description: No permite iniciar sesión
+ *             titulo: Error en el sistema
+ *             descripcion: No permite iniciar sesion
+ *             prioridad: Alta
  *     responses:
  *       201:
  *         description: Ticket creado correctamente
+ *       400:
+ *         description: Datos invalidos
  *       401:
- *         description: Token no enviado o inválido
+ *         description: Token no enviado o invalido
  */
-router.post('/', createTicket);
+router.post('/', asyncHandler(createTicket));
 
 export default router;

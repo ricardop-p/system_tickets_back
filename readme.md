@@ -1,46 +1,81 @@
 # System Tickets Backend
 
-Sistema de gestión de tickets de soporte técnico.
+Backend para gestion de tickets de soporte tecnico con Node.js, Express y PostgreSQL.
 
-## Características
+## Estructura
 
-- Crear y gestionar tickets de soporte
-- Asignar tickets a técnicos
-- Dar seguimiento al estado de tickets
-- Comentarios y notas en tickets
-- Historial de cambios
+```txt
+app.js                  # Configura Express, middlewares, Swagger y rutas
+server.js               # Arranca el servidor HTTP
+config/
+  env.js                # Centraliza variables de entorno
+  database.js           # Configura el pool de PostgreSQL
+  swagger.js            # Configuracion de Swagger
+controllers/            # Adaptan request/response HTTP
+services/               # Reglas de negocio
+repositories/           # Consultas SQL y acceso a datos
+routes/                 # Definicion de endpoints
+middleware/             # Auth y manejo de errores
+utils/                  # Utilidades compartidas
+```
 
 ## Requisitos
 
-- Node.js v14+
-- NPM o Yarn
-- Base de datos (MongoDB/PostgreSQL)
+- Node.js 20+
+- PostgreSQL
 
-## Instalación
+## Instalacion
 
 ```bash
 npm install
 ```
 
-## Configuración
+## Configuracion
 
-Crea un archivo `.env` con las variables de entorno necesarias:
+Crea un archivo `.env` usando `.env.example` como guia.
 
+En local puedes usar variables separadas:
+
+```env
+PORT=8007
+DB_USER=postgres
+DB_HOST=localhost
+DB_NAME=bd_tickets
+DB_PASSWORD=12345
+DB_PORT=5432
+JWT_SECRET=firma_secreta_123
 ```
-DB_USER=
-DB_HOST=
-DB_NAME=
-DB_PASSWORD=
-DB_PORT=
-JWT_SECRET=
+
+En Dockploy usa la URL interna de PostgreSQL:
+
+```env
+DATABASE_URL=postgresql://usuario:password@servicio-postgres:5432/nombre_db
+JWT_SECRET=firma_secreta_123
 ```
+
+La URL externa de PostgreSQL se usa solo desde fuera de la red interna del deploy.
+
 ## Ejecucion
 
 ```bash
 npm run dev
 ```
 
+Produccion:
 
-## Licencia
+```bash
+npm start
+```
 
-MIT
+## Health checks
+
+```txt
+GET /api/health
+GET /api/health/db
+```
+
+## Swagger
+
+```txt
+/api-docs
+```

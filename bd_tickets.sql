@@ -14,6 +14,8 @@ CREATE TABLE tickets (
     estado VARCHAR(20) DEFAULT 'Abierto',
     usuario_id INTEGER REFERENCES usuarios(id),
     tecnico_id INTEGER REFERENCES usuarios(id),
+    nivel_escalado INTEGER DEFAULT 1,
+    fecha_limite TIMESTAMP,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

@@ -1,5 +1,7 @@
 import express from 'express';
+
 import { getPriority, getSeniority } from '../controllers/variusController.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 
 const router = express.Router();
 
@@ -16,9 +18,9 @@ const router = express.Router();
  *       200:
  *         description: Lista de prioridades obtenida correctamente
  *       401:
- *         description: Token no enviado o inválido
+ *         description: Token no enviado o invalido
  */
-router.get('/priority', getPriority);
+router.get('/priority', asyncHandler(getPriority));
 
 /**
  * @swagger
@@ -26,7 +28,7 @@ router.get('/priority', getPriority);
  *   get:
  *     tags:
  *       - Varius
- *     summary: Consultar si una edad corresponde a mayoría de edad
+ *     summary: Consultar si una edad corresponde a mayoria de edad
  *     security:
  *       - bearerAuth: []
  *     parameters:
@@ -41,10 +43,10 @@ router.get('/priority', getPriority);
  *       200:
  *         description: Consulta realizada correctamente
  *       400:
- *         description: Edad inválida
+ *         description: Edad invalida
  *       401:
- *         description: Token no enviado o inválido
+ *         description: Token no enviado o invalido
  */
-router.get('/seniority', getSeniority);
+router.get('/seniority', asyncHandler(getSeniority));
 
 export default router;

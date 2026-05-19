@@ -1,7 +1,21 @@
 import express from 'express';
-import { checkDatabaseConnection } from '../controllers/healthController.js';
+import { checkApiHealth, checkDatabaseConnection } from '../controllers/healthController.js';
+import { asyncHandler } from '../utils/asyncHandler.js';
 
 const router = express.Router();
+
+/**
+ * @swagger
+ * /api/health:
+ *   get:
+ *     tags:
+ *       - Health
+ *     summary: Validar estado del servicio
+ *     responses:
+ *       200:
+ *         description: Servicio disponible
+ */
+router.get('/', checkApiHealth);
 
 /**
  * @swagger
@@ -16,6 +30,6 @@ const router = express.Router();
  *       500:
  *         description: Error al conectar con la base de datos
  */
-router.get('/db', checkDatabaseConnection);
+router.get('/db', asyncHandler(checkDatabaseConnection));
 
 export default router;

@@ -1,44 +1,39 @@
-// config/swagger.js
-
-import swaggerJsdoc from "swagger-jsdoc";
-import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 
 const swaggerOptions = {
   definition: {
-    openapi: "3.0.0",
+    openapi: '3.0.0',
     info: {
-      title: "API Sistema de Tickets",
-      version: "1.0.0",
-      description: "Documentación de la API del sistema de tickets",
+      title: 'API Sistema de Tickets',
+      version: '1.0.0',
+      description: 'Documentacion de la API del sistema de tickets',
     },
     servers: [
       {
-        url: "/",
-        description: "Servidor local",
+        url: '/',
+        description: 'Servidor actual',
       },
     ],
     components: {
       securitySchemes: {
         bearerAuth: {
-          type: "http",
-          scheme: "bearer",
-          bearerFormat: "JWT",
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT',
         },
       },
     },
   },
-
-  // IMPORTANTE:
-  apis: ["./routes/*.js"],
+  apis: ['./routes/*.js'],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
 
 export function setupSwagger(app) {
-  app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-  // Ruta útil para revisar si Swagger está leyendo algo
-  app.get("/api-docs.json", (req, res) => {
+  app.get('/api-docs.json', (req, res) => {
     res.json(swaggerSpec);
   });
 }

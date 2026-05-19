@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
 import ticketRoutes from './routes/ticketRoutes.js';
 import variusRoutes from './routes/variusRoutes.js';
+import healthRoutes from './routes/healthRoutes.js';
 import { authenticateToken } from './middleware/authMiddleware.js';
 import { setupSwagger } from './config/swagger.js';
 
@@ -20,6 +21,7 @@ setupSwagger(app);
 
 // Rutas de la API
 app.use('/api', authRoutes);
+app.use('/api/health', healthRoutes);
 app.use('/api/tickets', authenticateToken, ticketRoutes);
 app.use('/api/varius', authenticateToken, variusRoutes);
 

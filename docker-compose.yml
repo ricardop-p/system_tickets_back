@@ -13,7 +13,7 @@ services:
       - "traefik.http.routers.system-tickets-back.entrypoints=websecure"
       - "traefik.http.routers.system-tickets-back.tls=true"
 
-      - "traefik.http.routers.system-tickets-back.rule=Host(`api-v1.kobrax.art`) && PathPrefix(`/system-tickets`)"
+      - "traefik.http.routers.system-tickets-back.rule=Host(`system-tickets.kobrax.art`) && PathPrefix(`/system-tickets`)"
 
       - "traefik.http.middlewares.system-tickets-strip.stripprefix.prefixes=/system-tickets"
       - "traefik.http.routers.system-tickets-back.middlewares=system-tickets-strip"

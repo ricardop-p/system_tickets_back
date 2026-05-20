@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import { env } from '../config/env.js';
-import { findUserByEmail } from '../repositories/userRepository.js';
+import { findUserByEmail } from '../repositories/authRepository.js';
 import { createHttpError } from '../utils/httpError.js';
 
 const isBcryptHash = (password) => (

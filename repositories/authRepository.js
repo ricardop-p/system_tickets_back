@@ -2,7 +2,7 @@ import { query } from '../config/database.js';
 
 export const findUserByEmail = async (email) => {
   const result = await query(
-    'SELECT id, nombre, email, password, rol FROM usuarios WHERE email = $1',
+    `SELECT id, name AS nombre, email, password_hash AS password, role AS rol FROM users WHERE email = $1`,
     [email]
   );
 

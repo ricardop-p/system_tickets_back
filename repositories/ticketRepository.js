@@ -70,6 +70,15 @@ export const findPriorityById = async (id) => {
   return result.rows[0] || null;
 };
 
+export const findAllPriorities = async () => {
+  const result = await query(
+    `SELECT id, name, response_days, resolution_days, level
+     FROM priorities
+     ORDER BY level ASC`
+  );
+  return result.rows;
+};
+
 export const findCategoryById = async (id) => {
   const result = await query('SELECT * FROM categories WHERE id = $1 AND is_active = true', [id]);
   return result.rows[0] || null;

@@ -2,6 +2,7 @@ import {
   escalateTicket,
   findBreachedResolutionTickets,
   findExpiredFirstResponseTickets,
+  findAllPriorities,
 } from '../repositories/ticketRepository.js';
 import { addSystemEvent } from './commentsService.js';
 
@@ -15,6 +16,17 @@ export const calculateSlaDates = (priority, from = new Date()) => ({
   firstResponseDueAt: addDays(from, priority.response_days),
   resolutionDueAt: addDays(from, priority.resolution_days),
 });
+
+export const getSlaPolicies = async () => {
+  const priorities = await findAllPriorities();
+  return priorities.map((priority) => ({
+    id: priority.id,
+    name: priority.name,
+    level: priority.level,
+    response_days: priority.response_days,
+    resolution_days: priority.resolution_days,
+  }));
+};
 
 export const checkExpiredTickets = async () => {
   const escalated = [];

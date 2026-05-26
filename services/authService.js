@@ -43,6 +43,7 @@ export const loginUser = async ({ email, password }) => {
     user: {
       nombre: usuario.nombre,
       rol: usuario.rol,
+      email: usuario.email,
     },
   };
 };

@@ -60,7 +60,7 @@ router.get('/', asyncHandler(getTickets));
 
 /**
  * @swagger
- * /api/tickets:
+ * /api/createTickets:
  *   post:
  *     tags:
  *       - Tickets
@@ -274,7 +274,7 @@ router.patch('/:id/assign', asyncHandler(assignTicket));
 
 /**
  * @swagger
- * /api/tickets/{id}/comments:
+ * /api/tickets/comments:
  *   post:
  *     tags:
  *       - Ticket Comments
@@ -282,12 +282,7 @@ router.patch('/:id/assign', asyncHandler(assignTicket));
  *     description: ADMIN puede comentar cualquier ticket, AGENT solo asignados a el y USER solo propios.
  *     security:
  *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: integer
+ *     
  *     requestBody:
  *       required: true
  *       content:
@@ -299,8 +294,11 @@ router.patch('/:id/assign', asyncHandler(assignTicket));
  *             properties:
  *               comment:
  *                 type: string
+ *               ticket_id:
+ *                 type: integer
  *           example:
  *             comment: Se revisa el caso.
+ *             ticket_id: 1
  *     responses:
  *       201:
  *         description: Comentario creado correctamente

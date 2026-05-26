@@ -2,7 +2,7 @@ import { query } from '../config/database.js';
 
 export const getAllCategories = async () => {
   const result = await query(
-    'SELECT id, name, description FROM categories WHERE is_active = true order by id'
+    'SELECT id, name, description, is_active as active FROM categories  order by id'
   );
 
   return result.rows;

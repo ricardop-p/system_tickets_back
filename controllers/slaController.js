@@ -1,7 +1,12 @@
-import { checkExpiredTickets } from '../services/slaService.js';
+import { checkExpiredTickets, getSlaPolicies as fetchSlaPolicies } from '../services/slaService.js';
 import { createHttpError } from '../utils/httpError.js';
 
 const getUserRole = (user) => String(user?.role || user?.rol || '').toUpperCase();
+
+export const getSlaPolicies = async (req, res) => {
+  const policies = await fetchSlaPolicies();
+  return res.json(policies);
+};
 
 export const checkExpiredSla = async (req, res) => {
   if (getUserRole(req.user) !== 'ADMIN') {

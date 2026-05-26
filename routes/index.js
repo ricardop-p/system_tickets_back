@@ -6,6 +6,7 @@ import slaRoutes from './slaRoutes.js';
 import ticketRoutes from './ticketRoutes.js';
 import variusRoutes from './variusRoutes.js';
 import categoryRoutes from './categoryRoutes.js';
+import usersRoutes from './usersRoutes.js';
 import { authenticateToken } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
@@ -14,6 +15,7 @@ router.use('/health', healthRoutes);
 router.use('/', authRoutes);
 router.use('/tickets', authenticateToken, ticketRoutes);
 router.use('/sla', authenticateToken, slaRoutes);
+router.use('/users', authenticateToken, usersRoutes);
 router.use('/varius', authenticateToken, variusRoutes);
 router.use('/categories', authenticateToken, categoryRoutes);
 
